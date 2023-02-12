@@ -1,40 +1,23 @@
+mod en;
+mod pt;
 use std::io;
-use std::cmp::Ordering;
-use rand::Rng;
 
 fn main() {
-    println!("Guess the number!");
-
-    let secret_number = rand::thread_rng().gen_range(1..=100);
-
+    let mut choosen_language = String::new();
+    
     loop {
-        println!("Please input your guess.");
-        let mut guess = String::new();
-    
-        io::stdin()
-            .read_line(&mut guess)
-            .expect("Failed to read line");
-    
-        let guess: u32 = match guess.trim().parse() {
-            // parse returns a Result type, it returns Ok or Err, we can use this return to handle the error instead of blocking the application with an error, this is what expect would do.
-            // Err is a STRING that contains informations about the error, it won't match the type of number that parse should generate.
-            // This is why this match will work.
-            Ok(num) => num,
-            Err(_) => {
-                println!("Type a number");
-                continue
-            }
-        };
-    
-        println!("You guessed: {}", &guess);
+        println!("Select your language | Escolha seu idioma");
+        println!("pt-br | en\r\n");
+        io::stdin().read_line(&mut choosen_language).expect("You cannot skip this step | Você não pode pular esta etapa");
 
-        match guess.cmp(&secret_number) {
-            Ordering::Less => println!("too small!\r\n\r\n"),
-            Ordering::Greater => println!("too big!\r\n\r\n"),
-            Ordering::Equal => {
-                println!("You win!\r\n");
-                break;
-            }
+        match choosen_language.trim() {
+            "pt-br" => {
+                break pt::jogo_de_advinhar();
+            },
+            "en" => {
+                break en::guess_game();
+            },
+            _ => println!("Type a valid language | Digite um idioma válido")
         }
     }
 }
