@@ -7,3 +7,11 @@ The game can warn you about whether your guess is too smaller or too bigger than
 ---
 
 This code was built step-by-step following the rust official book / documentation.
+
+## What i learned
+
+- Let and let mut (imutable and mutable variables);
+- Match (a sort of switch, in javascript)
+- Expect (to throw error) and use match to *handle* errors
+- crates and standard crate
+- rustup and cargo
